@@ -1,5 +1,5 @@
 spring.application.name=url-cutter
-spring.datasource.url=jdbc:h2:file:/src/main/resourses/urldb
+spring.datasource.url=
 spring.datasource.driverClassName=org.h2.Driver
 spring.datasource.username=
 spring.datasource.password=

@@ -1,6 +1,5 @@
 package com.projects.urlcutter;
 
-import io.sentry.SystemOutLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
