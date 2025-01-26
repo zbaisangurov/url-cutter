@@ -14,11 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class RedirectServiceTest {
-  @Mock
-  private LinkRepository linkRepository;
+  @Mock private LinkRepository linkRepository;
 
-  @InjectMocks
-  private RedirectService redirectService;
+  @InjectMocks private RedirectService redirectService;
 
   @BeforeEach
   void setUp() {
@@ -44,8 +42,9 @@ public class RedirectServiceTest {
   void testGetOriginalUrl_NonExistingShortUrl() {
     String shortUrl = "x";
     when(linkRepository.findByShortUrl(shortUrl)).thenReturn(Optional.empty());
-    IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-        redirectService.getOriginalUrl(shortUrl));
+    IllegalArgumentException thrown =
+        assertThrows(
+            IllegalArgumentException.class, () -> redirectService.getOriginalUrl(shortUrl));
     assertEquals("Такой короткой ссылки не найдено.", thrown.getMessage());
     verify(linkRepository, never()).save(any(Link.class));
   }
