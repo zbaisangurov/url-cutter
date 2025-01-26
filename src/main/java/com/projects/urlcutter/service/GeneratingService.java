@@ -35,13 +35,12 @@ public class GeneratingService {
     Optional<Link> existingLink = linkRepository.findByOriginalUrl(originalUrl);
     if (existingLink.isPresent()) {
       logger.info("Достаем ссылку из БД");
-      existingLink.get().setCount(existingLink.get().getCount() + 1);
       return "/l/" + existingLink.get().getShortUrl();
     } else {
       logger.info("Ссылка отсутствует в БД");
       Link link = new Link();
       link.setOriginalUrl(originalUrl);
-      link.setCount(1);
+      link.setCount(0);
       linkRepository.save(link);
       String shortUrl = encodeBase62(link.getId());
       link.setShortUrl(shortUrl);
