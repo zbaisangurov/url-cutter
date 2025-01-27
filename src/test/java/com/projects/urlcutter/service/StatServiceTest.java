@@ -15,11 +15,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class StatServiceTest {
-  @Mock
-  private LinkRepository linkRepository;
+  @Mock private LinkRepository linkRepository;
 
-  @InjectMocks
-  private StatService statService;
+  @InjectMocks private StatService statService;
 
   @BeforeEach
   void setUp() {
@@ -51,8 +49,8 @@ public class StatServiceTest {
     String shortUrl = "y";
     when(linkRepository.findByShortUrl(shortUrl)).thenReturn(Optional.empty());
 
-    IllegalArgumentException thrown = assertThrows(IllegalArgumentException.class, () ->
-        statService.getLinkStats(shortUrl));
+    IllegalArgumentException thrown =
+        assertThrows(IllegalArgumentException.class, () -> statService.getLinkStats(shortUrl));
 
     assertEquals("Такая ссылка не найдена", thrown.getMessage());
     verify(linkRepository, times(1)).findByShortUrl(shortUrl);
