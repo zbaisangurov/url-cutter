@@ -9,5 +9,7 @@ public interface LinkRepository extends JpaRepository<Link, String> {
 
   Optional<Link> findByShortUrl(String shortUrl);
 
+  int countByCountGreaterThan(int count);
+
   boolean existsByShortUrl(String shortUrl);
 }
