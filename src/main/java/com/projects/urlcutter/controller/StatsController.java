@@ -43,7 +43,7 @@ public class StatsController {
       @RequestParam(defaultValue = "3") int linksPerPage) {
     logger.info("Получен запрос рейтинга ссылок. Количество: {}  Страница:{}", linksPerPage, page);
     linksPerPage = Math.min(linksPerPage, 100);
-    Pageable pageable = PageRequest.of(page-1, linksPerPage);
+    Pageable pageable = PageRequest.of(page - 1, linksPerPage);
     List<LinkStatsResponse> stats = statService.getAllLinksStats(pageable);
     return ResponseEntity.ok(stats);
   }

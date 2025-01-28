@@ -33,22 +33,23 @@ public class StatService {
         link.getOriginalUrl(), "/l/" + link.getShortUrl(), rank, link.getCount());
   }
 
-  public List<LinkStatsResponse> getAllLinksStats(Pageable pageable){
+  public List<LinkStatsResponse> getAllLinksStats(Pageable pageable) {
     Page<Link> page = linkRepository.findAllByOrderByCountDesc(pageable);
     return page.getContent().stream()
-        .map(link -> new LinkStatsResponse(
-            link.getOriginalUrl(),
-            "/l/" + link.getShortUrl(),
-            linkRepository.countByCountGreaterThan(link.getCount()) + 1,
-            link.getCount()
-        ))
+        .map(
+            link ->
+                new LinkStatsResponse(
+                    link.getOriginalUrl(),
+                    "/l/" + link.getShortUrl(),
+                    linkRepository.countByCountGreaterThan(link.getCount()) + 1,
+                    link.getCount()))
         .collect(Collectors.toList());
-        /*linkRepository.findAllByOrderByCountDesc(pageable)
-        .map(link -> new LinkStatsResponse(
-            link.getOriginalUrl(),
-            "/l/" + link.getShortUrl(),
-            linkRepository.countByCountGreaterThan(link.getCount()) + 1,
-            link.getCount()
-        ));*/
+    /*linkRepository.findAllByOrderByCountDesc(pageable)
+    .map(link -> new LinkStatsResponse(
+        link.getOriginalUrl(),
+        "/l/" + link.getShortUrl(),
+        linkRepository.countByCountGreaterThan(link.getCount()) + 1,
+        link.getCount()
+    ));*/
   }
 }
