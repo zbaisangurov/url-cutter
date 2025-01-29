@@ -28,8 +28,8 @@ public class GeneratingService {
   private static final Pattern URL_PATTERN = Pattern.compile(URL_REGEX, Pattern.CASE_INSENSITIVE);
 
   /**
-   * Генерирует короткую ссылку на основе оригинального URL.
-   * Если ссылка уже существует в БД, возвращает её.
+   * Генерирует короткую ссылку на основе оригинального URL. Если ссылка уже существует в БД,
+   * возвращает её.
    *
    * @param originalUrl оригинальный URL
    * @return короткая ссылка
