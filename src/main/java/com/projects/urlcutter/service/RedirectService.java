@@ -17,6 +17,13 @@ public class RedirectService {
     this.linkRepository = linkRepository;
   }
 
+  /**
+   * Получает оригинальный URL по короткой ссылке.
+   *
+   * @param hash идентификатор короткой ссылки
+   * @return строка с оригинальным URL
+   * @throws IllegalArgumentException если короткая ссылка не найдена в базе
+   */
   public String getOriginalUrl(String hash) {
     logger.info("Поиск оригинального URL...");
     Optional<Link> linkOptional = linkRepository.findByShortUrl(hash);

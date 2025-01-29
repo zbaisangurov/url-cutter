@@ -22,6 +22,12 @@ public class LinkController {
     this.generatingService = generatingService;
   }
 
+  /**
+   * Генерирует короткую ссылку для переданного URL.
+   *
+   * @param linkRequest объект с оригинальным URL
+   * @return ResponseEntity с объектом, содержащим короткую ссылку
+   */
   @PostMapping("/generate")
   public ResponseEntity<LinkResponse> generateLink(@RequestBody LinkRequest linkRequest) {
     logger.info("Получен запрос, идёт обработка");

@@ -21,6 +21,13 @@ public class StatService {
     this.linkRepository = linkRepository;
   }
 
+  /**
+   * Получает статистику по конкретной ссылке.
+   *
+   * @param hash идентификатор короткой ссылки
+   * @return объект статистики LinkStatsResponse
+   * @throws IllegalArgumentException если ссылка не найдена
+   */
   public LinkStatsResponse getLinkStats(String hash) {
     logger.info("Получение статистики по запросу");
     Optional<Link> linkOptional = linkRepository.findByShortUrl(hash);
@@ -33,6 +40,12 @@ public class StatService {
         link.getOriginalUrl(), "/l/" + link.getShortUrl(), rank, link.getCount());
   }
 
+  /**
+   * Получает рейтинг популярных ссылок с постраничным выводом.
+   *
+   * @param pageable объект пагинации
+   * @return список объектов LinkStatsResponse
+   */
   public List<LinkStatsResponse> getAllLinksStats(Pageable pageable) {
     Page<Link> page = linkRepository.findAllByOrderByCountDesc(pageable);
     return page.getContent().stream()
@@ -44,12 +57,5 @@ public class StatService {
                     linkRepository.countByCountGreaterThan(link.getCount()) + 1,
                     link.getCount()))
         .collect(Collectors.toList());
-    /*linkRepository.findAllByOrderByCountDesc(pageable)
-    .map(link -> new LinkStatsResponse(
-        link.getOriginalUrl(),
-        "/l/" + link.getShortUrl(),
-        linkRepository.countByCountGreaterThan(link.getCount()) + 1,
-        link.getCount()
-    ));*/
   }
 }

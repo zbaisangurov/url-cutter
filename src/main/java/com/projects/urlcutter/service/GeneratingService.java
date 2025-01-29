@@ -27,6 +27,13 @@ public class GeneratingService {
           + "(/.*)?$";
   private static final Pattern URL_PATTERN = Pattern.compile(URL_REGEX, Pattern.CASE_INSENSITIVE);
 
+  /**
+   * Генерирует короткую ссылку на основе оригинального URL.
+   * Если ссылка уже существует в БД, возвращает её.
+   *
+   * @param originalUrl оригинальный URL
+   * @return короткая ссылка
+   */
   @Transactional
   public String getShortLink(String originalUrl) {
     if (!isValidUrl(originalUrl)) {
@@ -52,6 +59,12 @@ public class GeneratingService {
   private static final String BASE62_ALPHABET =
       "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 
+  /**
+   * Производит генерацию короткой ссылки на основе алгоритма хэширования Base62
+   *
+   * @param id уникальный идентификатор записи в базе
+   * @return строка с короткой ссылкой
+   */
   private String encodeBase62(int id) {
     StringBuilder encoded = new StringBuilder();
     while (id > 0) {
@@ -61,6 +74,12 @@ public class GeneratingService {
     return encoded.toString();
   }
 
+  /**
+   * Проверяет корректность URL.
+   *
+   * @param url строка URL
+   * @return true, если URL валиден, иначе false
+   */
   private boolean isValidUrl(String url) {
     return URL_PATTERN.matcher(url).matches();
   }

@@ -25,6 +25,13 @@ public class StatsController {
     this.statService = statService;
   }
 
+  /**
+   * Получает статистику по конкретной короткой ссылке.
+   *
+   * @param hash уникальный идентификатор короткой ссылки
+   * @return ResponseEntity с объектом статистики
+   * @throws IllegalArgumentException, если такой уникальный идентификатор отсутствует в базе
+   */
   @GetMapping("/{hash}")
   public ResponseEntity<LinkStatsResponse> getLinkStats(@PathVariable String hash) {
     logger.info("Получен запрос статистики по короткой ссылке {}", hash);
@@ -37,6 +44,13 @@ public class StatsController {
     }
   }
 
+  /**
+   * Получает рейтинг популярных ссылок с постраничным выводом.
+   *
+   * @param page  номер страницы (по умолчанию 1)
+   * @param linksPerPage количество записей на странице (по умолчанию 3, не более 100)
+   * @return ResponseEntity со списком популярных ссылок
+   */
   @GetMapping
   public ResponseEntity<List<LinkStatsResponse>> getLinkStats(
       @RequestParam(defaultValue = "1") int page,

@@ -22,6 +22,13 @@ public class RedirectController {
     this.redirectService = redirectService;
   }
 
+  /**
+   * Выполняет редирект по короткой ссылке.
+   *
+   * @param hash уникальный идентификатор короткой ссылки
+   * @return ResponseEntity с редиректом (HTTP 302)
+   * @throws IllegalArgumentException, если оригинальная ссылка отсутствует в базе
+   */
   @GetMapping("/l/{hash}")
   public ResponseEntity<Void> redirectLink(@PathVariable String hash) {
     logger.info("Получен запрос на редирект: /l/{}", hash);
